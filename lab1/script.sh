@@ -4,9 +4,9 @@
 #по времени последнего изменения
 function traverse()
 {
-    count=$(($count + 1))
+    
     list=($(ls -1td $1/*/))
-    if [ ${#list[@]} -eq 0 ]; then
+    if [ ${#list[@]} -lt 1 ]; then
         return
     fi
     echo ""
@@ -20,7 +20,8 @@ function traverse()
             tmp=$(basename $i)
             echo "|_$tmp"
         done
-            traverse "$folder"     
+            traverse "$folder"  
+            count=$(($count + 1))   
     done
     
 }
@@ -30,4 +31,8 @@ function main()
     traverse "$1"
     echo "Total Directories: $count"
 }
-main "$1"  
+if [ "$2" != "-a" ]; then
+    main "$1" 2>/dev/null
+else
+    main "$1"
+fi
