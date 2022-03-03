@@ -38,4 +38,8 @@ function main()
     traverse "$top"
     echo "Total Directories: $count"
 }
-main "$1"
+if [ "$#" -gt 1 ]; then
+    echo "Illegal number of parameters"
+else
+    main "$1"
+fi

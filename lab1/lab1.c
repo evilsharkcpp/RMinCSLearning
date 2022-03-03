@@ -45,7 +45,6 @@ int traverse(char* dirName)
         return -1;
     }
     chdir(dirName);
-    totalDirs++;
     int listSize = 0;
     while ((entry = readdir(dir_p)) != NULL)
     {
@@ -74,7 +73,11 @@ int traverse(char* dirName)
         print(listDirs, listSize);
 
         for (int i = 0; i < listSize; i++)
+        {
             traverse(listDirs[i]->d_name);
+            totalDirs++;
+        }
+
     }
     chdir("..");
     closedir(dir_p);
@@ -87,8 +90,13 @@ int traverse(char* dirName)
 int main(int argc, char* argv[])
 {
     char* topdir = ".";
-    if (argc >= 2)
+    if (argc <= 2)
         topdir = argv[1];
+    else
+    {
+        printf("Illegal number of parameters\n");
+        return -1;
+    }
     int count = traverse(topdir);
     if (count == -1) return -1;
     printf("\nTotal directories: %d\n", count);
