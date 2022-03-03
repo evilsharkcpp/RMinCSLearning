@@ -90,9 +90,9 @@ int traverse(char* dirName)
 int main(int argc, char* argv[])
 {
     char* topdir = ".";
-    if (argc <= 2)
+    if (argc == 2)
         topdir = argv[1];
-    else
+    else if (argc > 2)
     {
         printf("Illegal number of parameters\n");
         return -1;
