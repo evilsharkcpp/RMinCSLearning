@@ -29,7 +29,7 @@ function main()
     top="."
     if [ ! -z $1 ]; then
         top="$1"
-        ls "$top"
+        ls "$top" >/dev/null
         if [ $? -ne 0 ]; then
             return
         fi
